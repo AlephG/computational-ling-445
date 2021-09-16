@@ -8,6 +8,7 @@
 (defn add-up [x y] (+ x y))
 
 
+
 ;; Problem 6
 ;; Define a function `is-it-four?` 
 ;;   (Note: Don't forget the question mark in the name!)
