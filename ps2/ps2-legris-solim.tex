@@ -126,6 +126,10 @@ some kind. In each case, explain what's wrong and why, and fix it:
 \texttt{ps\PSnum-lastname-firstname.clj} and
 \textbf{describe what is wrong and why here}.
 
+For the first procedure, there is no parameter vector. 
+
+For the second procedure, a function is applied on the parameters before they are bound to values giving a syntax error. Even if that were to work, it would compute the sum of powers of four, not of squares.
+
 \noindent\hrulefill %--------------------------------
 
 \paragraph{Problem 3:}
@@ -144,6 +148,14 @@ so it is not evaluated before being assigned to the symbol.
 
 \paragraph{Answer 3:} Please put your answer in \texttt{ps\PSnum-lastname-firstname.clj} as
 well as here.
+
+\begin{lstlisting}
+(def exp-13-1 '(- 15 2))
+(def exp-13-2 '(* 3.25 4))
+(def exp-13-3 '(/ 26 2))
+(def exp-13-4 '(+ 7 6))
+\end{lstlisting}
+
 
 \noindent\hrulefill %--------------------------------
 
@@ -316,7 +328,13 @@ $(A\cdot B)$ to denote the concatenation of $A$ and $B$, in
 that order. Find an example of languages $A$ and $B$ such that
 $(A\cdot B)=(B\cdot A)$.
 
-\paragraph{Answer 17:} Please put your answer here.
+\paragraph{Answer 17:} Please put your answer here. 
+
+\begin{gather*}
+    \text{Let } A = \{a, b\} \text{ and } B = \{\epsilon\}\\
+    \Rightarrow (A\cdot B)=\{a\cdot \epsilon, b\cdot \epsilon \} \text{ and } (B\cdot A)=\{\epsilon \cdot a, \epsilon \cdot b\}\\
+    \therefore (A\cdot B)=(B\cdot A)=\{a, b\}
+\end{gather*}
 
 \noindent\hrulefill %--------------------------------
 
@@ -326,6 +344,13 @@ such that $(A\cdot B)$ does not equal $(B\cdot A)$
 
 \paragraph{Answer 18:} Please put your answer here.
 
+\begin{gather*}
+    \text{Let } A = \{a, b\} \text{ and } B = \{c\}\\
+    \Rightarrow (A\cdot B)=\{a\cdot c, b\cdot c \} \text{ and } (B\cdot A)=\{c\cdot a, c\cdot b\}  \\
+    \therefore (A\cdot B)\neq (B\cdot A)
+\end{gather*}
+
+
 \noindent\hrulefill %--------------------------------
 
 \paragraph{Problem 19:}
@@ -334,13 +359,25 @@ i.e. $L=(L\cdot L)$.
 
 \paragraph{Answer 19:} Please put your answer here.
 
+\begin{gather*}
+    \text{Let } L = \{\epsilon\} \\
+    \Rightarrow L^2 = \{\epsilon \cdot \epsilon\}=\{\epsilon\}  \\
+    \therefore L = L^2
+\end{gather*}
+
+
 \noindent\hrulefill %--------------------------------
 
 \paragraph{Problem 20:}
 Argue that the intersection of any two languages $L$ and $L'$ is always
 contained in $L$.
-
 \paragraph{Answer 20:} Please put your answer here.
+
+\begin{gather*}
+    \text{Let } I = L \cap L' = \{x | x \in L \wedge x \in L'\}\\
+    \Rightarrow  \forall x \in I, x\in L \\
+    \therefore \text{The intersection of any two languages L and L' is always contained in L} 
+\end{gather*}
 
 \noindent\hrulefill %--------------------------------
 
@@ -350,16 +387,53 @@ of Cartesian products $(L_1 \times L_3) \cup (L_2 \times L_4)$ is
 always contained in the Cartesian product of unions
 $(L_1 \cup L_2) \times (L_3 \cup L_4)$.
 
-\paragraph{Answer 21:} Please put your answer here.
+\noindent
+\paragraph{Answer 21:} Please put your answer here.\\
+\noindent\\
+By definition,
+\begin{gather*}
+    (L_1 \times L_3) \cup (L_2 \times L_4) = \{a\cdot b | (a\in L_1 \wedge b \in L_3) \vee (a\in L_2 \wedge b\in L_4)\}\\
+    (L_1 \cup L_2) \times (L_3 \cup L_4) = \{a\cdot b | (a\in L_1 \vee a \in L_2) \wedge (b\in L_3 \vee b\in L_4)\}\\
+\end{gather*}
+\noindent
+It suffices to argue that the logical conditions on objects belonging to $(L_1 \cup L_2) \times (L_3 \cup L_4)$ are met for all possible members of  $(L_1 \times L_3) \cup (L_2 \times L_4)$ 
+
+\subparagraph{Case 1:}
+\begin{gather*}
+    \text{Suppose } a\in L_1 \wedge b\in L_3\\
+    \Rightarrow (a\in L_1 \vee a\in L_2) \wedge (b\in L_3 \vee b\in L_4)
+\end{gather*}
+
+\subparagraph{Case 2:}
+\begin{gather*}
+    \text{Suppose } a\in L_2 \wedge b\in L_4\\
+    \Rightarrow (a\in L_1 \vee a\in L_2) \wedge (b\in L_3 \vee b\in L_4)
+\end{gather*}
+
+\subparagraph{Case 3:}
+\begin{gather*}
+    \text{Suppose now that } a\in L_1 \wedge a\in L_2 \wedge b\in L_3 \wedge b\in L_4\\
+    \Rightarrow (a\in L_1 \vee a\in L_2) \wedge (b\in L_3 \vee b\in L_4) 
+\end{gather*}
+
+\begin{gather*}
+    \therefore (L_1 \cup L_2) \times (L_3 \cup L_4) \subseteq (L_1 \times L_3) \cup (L_2 \times L_4) \text{ given case 1, 2, 3 }  
+\end{gather*}
 
 \noindent\hrulefill %--------------------------------
 
-\paragraph{Problem 22:}
+\paragraph{Problem 22:} 
 Let $L$ and $L'$ be finite languages. Show that the number of elements
 in the Cartesian product $L \times L'$ is always equal to the number
 of elements in $L' \times L$.
 
 \paragraph{Answer 22:} Please put your answer here.
+
+\begin{gather*}
+    \text{Suppose } |L| = n \text{ and } |L'| = m \text{ for some } m,n \in \mathbb{N}\\
+    \Rightarrow |L\times L'| = n\cdot m \text{ and } |L'\times L| = m\cdot n\\
+    \therefore |L\times L'| = |L'\times L|
+\end{gather*}
 
 \noindent\hrulefill %--------------------------------
 
@@ -369,6 +443,45 @@ Suppose $L$ is a language, and that concatenation of $L$ with itself is equal to
 $(L\cdot L) = L$. Show that $L$ is either the empty set, 
 the set $\{\epsilon\}$, or an infinite language.
 
-\paragraph{Answer 23:} Please put your answer here.
+
+\paragraph{Answer 23:} Please put your answer here.\\
+\noindent \\
+We can show the above by examining each possible case. Namely, $L = \{\}$, $L=\{\epsilon\}$, $|L| = \infty$ or any arbitrary $L$ that is not one of the three aforementioned cases.
+
+\subparagraph{Case 1: $L=\{\}$}
+\begin{gather*}
+    \text{It is trivial to see that } (L\cdot L) = \{\} \text{ since this amounts to concatenating nothing with nothing}\\
+    \therefore  (L\cdot L) = L
+\end{gather*}
+
+\subparagraph{Case 2: $L=\{\epsilon\}$}
+\begin{gather*}
+    (L\cdot L) = \{\epsilon \cdot \epsilon\} = \{\epsilon\}\\
+    \therefore (L\cdot L) = L
+\end{gather*}
+
+\subparagraph{Case 3: $|L| = \infty$}
+\begin{gather*}
+    \text{Let $L$ be a language defined over some vocabulary $V$ and } |L| = \infty\\
+    \text{We know } L \subseteq V^* \Rightarrow L = V^* \text{ since } |L|=|V^*|\\
+    \text{Now, suppose } (L\cdot L) \neq L\\
+    \Rightarrow \exists a \in (L\cdot L) \text{ s.t } a\notin L \\
+    \text{But this cannot be since } L = V^* \text{ and } V^* \text{ is the set of all possible strings over vocabulary } V\\
+    \therefore (L\cdot L) = L
+\end{gather*}
+
+\subparagraph{Case 4:}$L$ is any other language
+\begin{gather*}
+    \text{Let $L$ be any arbitrary finite language where } |L| > 0 \text{ and } L \neq \{\epsilon\}\\
+    \text{Suppose that } (L\cdot L) = L\\
+    \text{Consider } L' = \{a, b\}\\
+    \Rightarrow (L'\cdot L') = \{aa, ab, ba, bb\}\\
+    \therefore (L'\cdot L') \neq L' \rightarrow \leftarrow \\
+    \therefore  (L\cdot L) \neq L \text{ for some arbitrary finite language where } |L| > 0 \text{ and } L \neq \{\epsilon\}
+\end{gather*}
+
+\begin{gather*}
+    \therefore \text{If } (L\cdot L) = L, \text{ then $L$ must be either the empty set, the set $\{\epsilon\}$ or an infinite language by case 1, 2, 3, 4}
+\end{gather*}
 
 \end{document}
